@@ -27,29 +27,31 @@ namespace MontyHall.API.Service
         {
             int wins = 0;
             Random rand = new Random();
-            for (int i = 0; i < totalGamesCount; i++)
+            if (totalGamesCount > 0)
             {
-                List<int> doors = new List<int>() { 0, 0, 0 };
-
-                int carDoor = rand.Next(3);
-                doors[carDoor] = 1;
-                int selectedDoor = rand.Next(3);
-
-                if (stickToSameDoor)
+                for (int i = 0; i < totalGamesCount; i++)
                 {
-                    if (carDoor == selectedDoor)
-                        wins++;
-                }
-                else
-                {
-                    int shownDoor = GetShownDoor(doors, selectedDoor);
-                    int switchedDoor = GetSwitchedDoor(selectedDoor, shownDoor);
+                    List<int> doors = new List<int>() { 0, 0, 0 };
 
-                    if (switchedDoor == carDoor)
-                        wins++;
+                    int carDoor = rand.Next(3);
+                    doors[carDoor] = 1;
+                    int selectedDoor = rand.Next(3);
+
+                    if (stickToSameDoor)
+                    {
+                        if (carDoor == selectedDoor)
+                            wins++;
+                    }
+                    else
+                    {
+                        int shownDoor = GetShownDoor(doors, selectedDoor);
+                        int switchedDoor = GetSwitchedDoor(selectedDoor, shownDoor);
+
+                        if (switchedDoor == carDoor)
+                            wins++;
+                    }
                 }
             }
-
             return Task.FromResult(wins);
         }
         private int GetSwitchedDoor(int selectedDoor, int shownDoor)

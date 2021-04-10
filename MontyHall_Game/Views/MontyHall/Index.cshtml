@@ -1,0 +1,53 @@
+﻿@model MontyHall_Game.Models.MontyHallSimulationViewModel
+
+@{
+    ViewBag.Title = "Monty Hall";
+}
+
+@using (Html.BeginForm("Index", "MontyHall", FormMethod.Post))
+{
+    <div class="jumbotron">
+        <h2>Monty Hall Simulator</h2>
+
+        <div class="row">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.TotalGames)
+                            @Html.TextBox("TotalGames")
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.StickToSameDoor)
+                            @Html.EditorFor(model => model.StickToSameDoor)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <b>@Html.DisplayNameFor(model => model.TotalWins)</b>: 
+                            @Html.ValueFor(model => model.TotalWins)
+                            <b>@Html.DisplayNameFor(model => model.TotalLoss)</b>: 
+                            @Html.ValueFor(model => model.TotalLoss)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-wide btn-info" value="Search">
+                            @*@Html.ActionLink("Clear", "Index", null, new { @class = "btn btn-wide btn-primary" })*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
