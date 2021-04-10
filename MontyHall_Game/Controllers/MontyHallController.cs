@@ -14,7 +14,6 @@ namespace MontyHall_Game.Controllers
 {
     public class MontyHallController : Controller
     {
-
         public async Task<ActionResult> Index(int? totalGames, bool? sticktoSameDoor)
         {
             if (totalGames != null && totalGames > 0 && sticktoSameDoor != null)
