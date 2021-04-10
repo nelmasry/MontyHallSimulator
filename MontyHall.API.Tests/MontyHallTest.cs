@@ -36,5 +36,27 @@ namespace MontyHall.API.Tests
             int loss = totalGames - wins;
             Assert.True(wins > loss);
         }
+
+        [Fact]
+        public async void RETURN_AVERAGE_THIRD_WINS_IF_STICKTOSAMEDOOR()
+        {
+            int totalGames = 100;
+            var wins = await _MontyHallService.SimulateMontyHall(totalGames, true);
+            double minPercentage = totalGames * 0.15;
+            double maxPercentage = totalGames * 0.45;
+            Assert.True(wins >= minPercentage);
+            Assert.True(wins <= maxPercentage);
+        }
+
+        [Fact]
+        public async void RETURN_AVERAGE_TWOTHIRDs_WINS_IF_CHANGEDOOR()
+        {
+            int totalGames = 100;
+            var wins = await _MontyHallService.SimulateMontyHall(totalGames, false);
+            double minPercentage = totalGames * 0.55;
+            double maxPercentage = totalGames * 0.85;
+            Assert.True(wins >= minPercentage);
+            Assert.True(wins <= maxPercentage);
+        }
     }
 }
