@@ -108,12 +108,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MontyHall_Game.API\MontyHall_Game.API.csproj">
-      <Project>{10251B4B-2DF7-4BB6-9D16-16487FB81F93}</Project>
-      <Name>MontyHall_Game.API</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
