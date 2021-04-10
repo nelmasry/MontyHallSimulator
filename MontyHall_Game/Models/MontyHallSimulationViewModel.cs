@@ -9,6 +9,7 @@ namespace MontyHall_Game.Models
 {
     public class MontyHallSimulationViewModel
     {
+        [Required]
         [Display(Name = "Total Games")]
         public int TotalGames { get; set; }
 

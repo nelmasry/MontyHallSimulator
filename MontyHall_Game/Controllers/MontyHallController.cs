@@ -14,31 +14,37 @@ namespace MontyHall_Game.Controllers
 {
     public class MontyHallController : Controller
     {
-        public async Task<ActionResult> Index(int? totalGames, bool? sticktoSameDoor)
+        public async Task<ActionResult> Index(MontyHallSimulationViewModel model)
         {
-            if (totalGames != null && totalGames > 0 && sticktoSameDoor != null)
+            try
             {
-                HttpResponseMessage response;
-                using (var _client = new HttpClient())
+                if (ModelState.IsValid)
                 {
-                    _client.DefaultRequestHeaders.Accept.Clear();
-                    _client.BaseAddress = new Uri(ConfigurationManager.AppSettings["MontyHallApiAddress"]);
-                    _client.DefaultRequestHeaders.Add("Accept", "application/json");
-
-                    response = await _client.GetAsync($"{ConfigurationManager.AppSettings["MontyHallApiPath"]}/{totalGames}/{sticktoSameDoor}");
-
-                    if (response.StatusCode == HttpStatusCode.OK)
+                    HttpResponseMessage response;
+                    using (var _client = new HttpClient())
                     {
-                        var motyHallResult = JsonConvert.DeserializeObject<MontyHallSimulationResponse>(
-                            await response.Content.ReadAsStringAsync());
-                        return View(new MontyHallSimulationViewModel()
+                        _client.DefaultRequestHeaders.Accept.Clear();
+                        _client.BaseAddress = new Uri(ConfigurationManager.AppSettings["MontyHallApiAddress"]);
+                        _client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+                        response = await _client.GetAsync($"{ConfigurationManager.AppSettings["MontyHallApiPath"]}" +
+                            $"/{model.TotalGames}/{model.StickToSameDoor}");
+
+                        if (response.StatusCode == HttpStatusCode.OK)
                         {
-                            TotalGames = totalGames.Value,
-                            TotalWins = motyHallResult.TotalWins,
-                            TotalLoss = motyHallResult.TotalLoss
-                        });
+                            var motyHallResult = JsonConvert.DeserializeObject<MontyHallSimulationResponse>(
+                                await response.Content.ReadAsStringAsync());
+                            model.TotalWins = motyHallResult.TotalWins;
+                            model.TotalLoss = motyHallResult.TotalLoss;
+                            return View(model);
+                        }
+                        ModelState.AddModelError("SimulateError", $"Error while simulating games, ex: {response.Content.ReadAsStringAsync()}");
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("SimulateError", $"Error while simulating games, ex: {ex.Message}");
             }
             return View();
         }

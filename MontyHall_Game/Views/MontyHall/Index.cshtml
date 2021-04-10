@@ -7,20 +7,21 @@
 @using (Html.BeginForm("Index", "MontyHall", FormMethod.Post))
 {
     <div class="jumbotron">
-        <h2>Monty Hall Simulator</h2>
+        <h2>Monty Hall Simulator</h2><br />
 
         <div class="row">
             <div class="form-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div>
                         <div class="form-group">
                             @Html.DisplayNameFor(model => model.TotalGames)
-                            @Html.TextBox("TotalGames")
+                            @Html.EditorFor(model => model.TotalGames)
+                            @Html.ValidationMessageFor(model => model.TotalGames, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div>
                         <div class="form-group">
                             @Html.DisplayNameFor(model => model.StickToSameDoor)
                             @Html.EditorFor(model => model.StickToSameDoor)
@@ -29,7 +30,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div>
                         <div class="form-group">
                             <b>@Html.DisplayNameFor(model => model.TotalWins)</b>: 
                             @Html.ValueFor(model => model.TotalWins)
@@ -40,10 +41,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-wide btn-info" value="Simulate">
-                            @*@Html.ActionLink("Clear", "Index", null, new { @class = "btn btn-wide btn-primary" })*@
+                            @Html.ValidationMessage("SimulateError",new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
