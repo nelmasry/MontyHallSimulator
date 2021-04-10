@@ -1,0 +1,21 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/9Cookies.sln.DotSettings.user
+/9Cookies.Console/obj/Debug
+/9Cookies/obj/Debug
+/9Cookies/bin
+/.vs
+*.user
+/9Cookies.Console/bin/Debug
+/9Cookies9CookiesTests/obj
+/packages
+/9Cookies9CookiesTests/bin
+/9Cookies.Console9CookiesTests/obj
+/9Cookies.Console9CookiesTests/bin
+/9Cookies/obj
+/9Cookies.Console/bin
+/9Cookies.Console/obj
+/9Cookies.Common/bin/Debug
+/9Cookies.Common/obj/Debug
