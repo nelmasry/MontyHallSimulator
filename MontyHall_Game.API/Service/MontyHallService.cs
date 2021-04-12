@@ -54,11 +54,24 @@ namespace MontyHall.API.Service
             }
             return Task.FromResult(wins);
         }
+
+        /// <summary>
+        /// Get teh door that will be switched when guest decide to change selected door
+        /// </summary>
+        /// <param name="selectedDoor">Selected door by the guest</param>
+        /// <param name="shownDoor">The door shown by the game owner</param>
+        /// <returns></returns>
         private int GetSwitchedDoor(int selectedDoor, int shownDoor)
         {
             return new List<int>() { 0, 1, 2 }.Where(l => l != selectedDoor && l != shownDoor).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Pick the door that will be shown to guest which has the goat
+        /// </summary>
+        /// <param name="doors">List of the three door having two goats and a car</param>
+        /// <param name="selectedDoor">The door selected by the guest</param>
+        /// <returns></returns>
         private int GetShownDoor(List<int> doors, int selectedDoor)
         {
             for (int i = 0; i < doors.Count; i++)
